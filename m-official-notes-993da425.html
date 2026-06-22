@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>jiuyou · 主题探索页</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #eef7f5;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1e3a3a;
+      padding: 0 16px 40px;
+    }
+    .page-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* hero 横幅 —— 杂志风格 */
+    .hero {
+      background: linear-gradient(135deg, #1a5e5e 0%, #2a8a8a 70%, #3cafaf 100%);
+      margin: 20px 0 32px;
+      border-radius: 28px;
+      padding: 48px 28px 36px;
+      box-shadow: 0 12px 28px rgba(22, 78, 78, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      top: -40px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero .sub {
+      color: #d2f0ec;
+      font-size: 1.05rem;
+      max-width: 520px;
+      border-left: 4px solid #b8e6e0;
+      padding-left: 18px;
+      margin: 12px 0 18px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero .tag-line {
+      display: inline-block;
+      background: rgba(255,255,255,0.13);
+      backdrop-filter: blur(4px);
+      padding: 6px 18px;
+      border-radius: 40px;
+      color: #e2f7f3;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 背景说明卡片 — 网格卡片体系 */
+    .bg-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px 26px;
+      margin: 28px 0;
+      box-shadow: 0 6px 18px rgba(36, 94, 94, 0.06);
+      border-left: 6px solid #2d9b9b;
+    }
+    .bg-card h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #1b5c5c;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bg-card h2::before {
+      content: "⊞";
+      font-size: 1.8rem;
+      line-height: 1;
+      color: #2d9b9b;
+    }
+    .bg-card p {
+      color: #255353;
+      margin-bottom: 12px;
+    }
+
+    /* 三段自然介绍 —— 网格卡片模块 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin: 34px 0 28px;
+    }
+    @media (min-width: 640px) {
+      .grid-cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    .card-item {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 4px 14px rgba(36, 84, 84, 0.05);
+      transition: transform 0.15s ease;
+    }
+    .card-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(22, 78, 78, 0.08);
+    }
+    .card-item .num {
+      display: inline-block;
+      background: #1b7a7a;
+      color: white;
+      width: 36px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+    .card-item h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #1b5c5c;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .card-item p {
+      color: #2d5f5f;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* 摘录 / faq 摘要区块 */
+    .faq-section {
+      background: #f0f9f7;
+      border-radius: 24px;
+      padding: 24px 26px 28px;
+      margin: 28px 0;
+      border: 1px solid #c7e0db;
+    }
+    .faq-section h3 {
+      font-size: 1.3rem;
+      color: #124f4f;
+      font-weight: 500;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .faq-section h3::after {
+      content: "⋮⋮";
+      letter-spacing: 2px;
+      color: #2d8f8f;
+      font-size: 1.1rem;
+    }
+    .faq-item {
+      margin-bottom: 14px;
+      border-bottom: 1px dashed #bdd5d0;
+      padding-bottom: 12px;
+    }
+    .faq-item:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .faq-item .q {
+      font-weight: 500;
+      color: #0f4f4f;
+      font-size: 1rem;
+      display: flex;
+      gap: 8px;
+    }
+    .faq-item .q::before {
+      content: "▪";
+      color: #2d9b9b;
+    }
+    .faq-item .a {
+      color: #366a6a;
+      margin-top: 4px;
+      padding-left: 22px;
+      font-size: 0.93rem;
+    }
+
+    /* 页尾访问提示 — 嵌入链接 */
+    .footer-prompt {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 26px;
+      margin: 36px 0 16px;
+      text-align: center;
+      border: 1px solid #cfe5e1;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+    }
+    .footer-prompt p {
+      font-size: 1.05rem;
+      color: #1d5858;
+      margin-bottom: 6px;
+    }
+    .footer-prompt .highlight {
+      color: #147b7b;
+      font-weight: 500;
+    }
+    .footer-prompt .link-sentence {
+      margin-top: 12px;
+      font-size: 1rem;
+      background: #ebf7f4;
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 60px;
+      border: 1px solid #b7dbd4;
+    }
+    a {
+      color: #117a7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #9ccbc3;
+      transition: color 0.1s, border-color 0.1s;
+    }
+    a:hover {
+      color: #0b4f4f;
+      border-bottom-color: #0b4f4f;
+    }
+    .fine-print {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: #649494;
+      text-align: center;
+      border-top: 1px solid #c9ddd8;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 首页横幅 hero -->
+  <header class="hero">
+    <h1>jiuyou · 线索</h1>
+    <div class="sub">一个围绕主题内容展开的整理页，从关键词出发，梳理背景、结构与应用场景。</div>
+    <div class="tag-line">杂志专题 · 2025</div>
+  </header>
+
+  <!-- 背景说明卡片 -->
+  <section class="bg-card">
+    <h2>背景脉络</h2>
+    <p>“jiuyou”这个线索所指向的内容框架，最初围绕信息组织与交互轻量展开。它并非单一功能或封闭系统，而是一组可组合的思路：将常见模块重新编排，用更贴合直觉的方式呈现。在持续迭代中，逐渐形成一套以卡片、摘要、渐进式导航为主体的表达习惯。</p>
+    <p>从早期原型到现在的结构，设计上一直保持克制——没有过度装饰，所有节奏都服务于阅读与浏览。无论是桌面端还是移动设备，内容的层级都依靠间距、字重与点缀色来区分，而非依赖复杂组件。</p>
+  </section>
+
+  <!-- 三段自然介绍（网格卡片） -->
+  <div class="grid-cards">
+    <div class="card-item">
+      <span class="num">01</span>
+      <h3>信息切片的组织</h3>
+      <p>每一个区块都可以独立存在，同时又与上下文产生关联。通过一致的标题前缀、卡片分隔和色调引导，浏览者能快速定位自己感兴趣的部分。这种切片方式在长页面中尤其有效。</p>
+    </div>
+    <div class="card-item">
+      <span class="num">02</span>
+      <h3>蓝绿色系的功用</h3>
+      <p>蓝绿色调被用作视觉主线，从横幅到边框再到点缀标识，都保持相近的色相范围。这并非出于审美偏好，而是为了在界面中建立一条隐性的引导线——让视线自然地从标题流向内容，再流向交互入口。</p>
+    </div>
+    <div class="card-item">
+      <span class="num">03</span>
+      <h3>移动优先的阅读节奏</h3>
+      <p>卡片在窄屏上采用纵向堆叠，宽屏则借助三列网格提升信息密度。文字的间距、行高与按钮点击区域都针对触控操作做过适配，减少缩放与误触的可能。每一步调整都以实际阅读场景为参照。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要风格区块 -->
+  <section class="faq-section">
+    <h3>常见思路摘要</h3>
+    <div class="faq-item">
+      <div class="q">这种页面结构适合哪些场景？</div>
+      <div class="a">适合需要同时展示背景、要点和延伸内容的专题页或介绍页，尤其是希望保持信息层级清晰且不依赖过多交互逻辑的项目。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">为什么选择卡片作为主要容器？</div>
+      <div class="a">卡片可以自然隔离不同主题，同时在响应式布局中容易重新排列。搭配一致的圆角、阴影与点缀色，能让页面在保持统一感的同时又不显沉闷。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">能否直接复用这套样式？</div>
+      <div class="a">可以。整套样式基于原生 CSS，没有外部依赖。调整配色变量与间距即可适配不同主题。但建议根据实际内容重新斟酌标题与文案的节奏，避免模板感。</div>
+    </div>
+  </section>
+
+  <!-- 页尾访问提示 —— 链接自然嵌入句子 -->
+  <footer class="footer-prompt">
+    <p>如果你对这个主题的完整内容或持续更新感兴趣，</p>
+    <p class="link-sentence">
+      可以在浏览器中直接输入 <a href="https://m-official-jiuyou.com">jiuyou</a> 了解更多。
+    </p>
+    <p style="margin-top: 10px; font-size: 0.93rem; color: #468282;">
+      目前页面保持每月小幅修订，结构会随反馈逐步调整。
+    </p>
+  </footer>
+
+  <div class="fine-print">
+    杂志式专题 · 基于关键词 jiuyou 整理 · 内容保持克制与清晰
+  </div>
+</div>
+</body>
+</html>
